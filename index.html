@@ -1,63 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Calculadora jurosPooolpays</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pooolpays Calculator</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- YouTube button top-right -->
-  <a id="yt-link" class="yt-button" href="https://youtube.com/@granasemterno?si=vgbvvOTORxD6dYqC" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-      <path fill="#fff" d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.6 2.4 12 2.4 12 2.4s-4.6 0-8.6.4c-.5 0-1.4 0-2.1 1C.7 4.5.5 6.2.5 6.2S.2 8 .2 9.9v.2C.2 12.7.5 14.6.5 14.6s.2 1.7.8 2.4c.8.9 1.9.9 2.4 1 1.8.2 7.4.4 7.4.4s4.6 0 8.6-.4c.5 0 1.4 0 2.1-1 .6-.7.8-2.4.8-2.4s.3-2 .3-3.9v-.2c0-1.9-.3-3.7-.3-3.7z"></path>
-      <path fill="#ff0000" d="M9.8 15.5V8.6l6.1 3.4-6.1 3.5z"></path>
-    </svg>
-  </a>
 
-  <!-- Language flags top-left -->
-  <div class="lang-switch" id="lang-switch" aria-label="Escolher idioma">
-    <button data-lang="pt-BR" class="flag active" title="Português (BR)">🇧🇷</button>
-    <button data-lang="en" class="flag" title="English">🇬🇧</button>
-    <button data-lang="pt-PT" class="flag" title="Português (PT)">🇵🇹</button>
-    <button data-lang="hi" class="flag" title="हिन्दी">🇮🇳</button>
+<div class="language-selector">
+  <button id="language-btn">🇧🇷</button>
+  <div class="language-menu">
+    <span onclick="changeLanguage('pt')">🇧🇷</span>
+    <span onclick="changeLanguage('en')">🇬🇧</span>
+    <span onclick="changeLanguage('es')">🇪🇸</span>
+    <span onclick="changeLanguage('hi')">🇮🇳</span>
   </div>
+</div>
 
-  <main class="container">
-    <div class="card">
-      <header class="card-header">
-        <h1 id="title">Calculadora jurosPooolpays</h1>
-        <p id="subtitle" class="muted">Calcule rendimento com ciclos compostos</p>
-      </header>
+<div class="calculator-container">
+<h1 id="title">Calculadora de Juros Pooolpays</h1>
 
-      <div class="form">
-        <label for="capital" id="label-capital">Capital Inicial (R$):</label>
-        <input type="number" id="capital" placeholder="Ex: 1000.00" min="0.01" step="0.01" />
+<label>Aporte Inicial ($)</label>
+<input id="capital" type="number" placeholder="Ex: 1000">
 
-        <label for="tempoTotal" id="label-tempo">Tempo Total (dias):</label>
-        <input type="number" id="tempoTotal" placeholder="Ex: 60" min="1" />
+<label>Ciclo</label>
+<select id="ciclo">
+<option value="1-0.005">1 Dia (0.5%)</option>
+<option value="5-0.03">5 Dias (3%)</option>
+<option value="10-0.07">10 Dias (7%)</option>
+<option value="20-0.18">20 Dias (18%)</option>
+</select>
 
-        <label for="ciclo" id="label-ciclo">Escolha o Ciclo de Aporte:</label>
-        <select id="ciclo">
-          <option value="1-0.005">Ciclo 1 Dia (0,5%)</option>
-          <option value="5-0.03">Ciclo 5 Dias (3%)</option>
-          <option value="10-0.07">Ciclo 10 Dias (7%)</option>
-          <option value="20-0.18">Ciclo 20 Dias (18%)</option>
-        </select>
+<label>Repetições</label>
+<input id="repeticoes" type="number" placeholder="Ex: 5">
 
-        <button id="calc-btn" class="primary" type="button">Calcular Rendimento</button>
+<button onclick="calcularJurosPooolpays()">Calcular</button>
 
-        <div id="resultado" class="resultado-area" aria-live="polite">
-          Preencha os campos e clique em Calcular.
-        </div>
-      </div>
+<a href="https://youtu.be/F_z7pfbzI-E" target="_blank">
+<button class="youtube-btn">Ver Canal YouTube</button>
+</a>
 
-      <footer class="card-footer muted small">
-        <span id="note">Cálculo baseado em ciclos completos.</span>
-      </footer>
-    </div>
-  </main>
+<div id="resultado"></div>
+</div>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
