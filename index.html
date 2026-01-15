@@ -9,14 +9,21 @@
 </head>
 <body>
 
-<div class="language-selector">
-  <button id="language-btn">🇧🇷</button>
-  <div class="language-menu">
-    <span onclick="changeLanguage('pt')">🇧🇷</span>
-    <span onclick="changeLanguage('en')">🇬🇧</span>
-    <span onclick="changeLanguage('es')">🇪🇸</span>
-    <span onclick="changeLanguage('hi')">🇮🇳</span>
-  </div>
+<!-- Topo com idioma e YouTube -->
+<div class="top-bar">
+    <div class="language-selector">
+        <button id="language-btn">🇧🇷</button>
+        <div class="language-menu">
+            <span onclick="changeLanguage('pt')">🇧🇷</span>
+            <span onclick="changeLanguage('en')">🇬🇧</span>
+            <span onclick="changeLanguage('es')">🇪🇸</span>
+            <span onclick="changeLanguage('hi')">🇮🇳</span>
+        </div>
+    </div>
+    <a href="https://youtu.be/F_z7pfbzI-E" target="_blank" class="youtube-link">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube" class="youtube-icon">
+        Elite Investidor
+    </a>
 </div>
 
 <div class="calculator-container">
@@ -37,10 +44,6 @@
 <input id="repeticoes" type="number" placeholder="Ex: 5">
 
 <button onclick="calcularJurosPooolpays()">Calcular</button>
-
-<a href="https://youtu.be/F_z7pfbzI-E" target="_blank">
-<button class="youtube-btn">Ver Canal YouTube</button>
-</a>
 
 <div id="resultado"></div>
 </div>

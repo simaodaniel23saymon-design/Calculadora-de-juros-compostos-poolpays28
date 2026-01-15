@@ -1,26 +1,119 @@
-const translations = {
-  pt: 'Calculadora de Juros Pooolpays',
-  en: 'Pooolpays Interest Calculator',
-  es: 'Calculadora de Interés Pooolpays',
-  hi: 'Pooolpays ब्याज कैलकुलेटर'
-};
-
-function changeLanguage(lang){
-  document.getElementById('title').innerText = translations[lang];
-  document.getElementById('language-btn').innerText = {pt:'🇧🇷',en:'🇬🇧',es:'🇪🇸',hi:'🇮🇳'}[lang];
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e, #162447);
+    color: #fff;
+    margin: 0;
+    min-height: 100vh;
 }
 
-function calcularJurosPooolpays(){
-  const capital = parseFloat(document.getElementById("capital").value);
-  const repeticoes = parseInt(document.getElementById("repeticoes").value);
-  const [dias,taxa] = document.getElementById("ciclo").value.split("-").map(Number);
-  const resultadoElement = document.getElementById("resultado");
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: rgba(0,0,0,0.6);
+}
 
-  if(isNaN(capital) || isNaN(repeticoes)){
-    resultadoElement.innerText = 'Por favor, insira valores válidos.';
-    return;
-  }
+.language-selector button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.3em;
+}
 
-  const montante = capital * Math.pow(1 + taxa, repeticoes);
-  resultadoElement.innerHTML = `<p>Montante Final: $${montante.toFixed(2)}</p>`;
+.language-menu {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    background: #000c;
+    border-radius: 8px;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+.language-selector:hover .language-menu {
+    display: flex;
+}
+
+.language-menu span {
+    padding: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+.youtube-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+.youtube-link:hover {
+    color: #ff0000;
+}
+
+.youtube-icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+.calculator-container {
+    background: rgba(0,0,0,0.75);
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 450px;
+    margin: 50px auto;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #00fff7;
+    text-shadow: 0 0 10px #00fff7;
+}
+
+label {
+    display: block;
+    margin: 15px 0 5px;
+    font-weight: bold;
+    color: #00e6e6;
+}
+
+input[type="number"],
+select {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-size: 1em;
+    box-sizing: border-box;
+    outline: none;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,255,255,0.5);
 }
