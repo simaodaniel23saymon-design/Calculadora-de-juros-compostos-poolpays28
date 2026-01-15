@@ -1,129 +1,110 @@
-// Translations for the interface
-const translations = {
-  "pt-BR": {
-    title: "Calculadora jurosPooolpays",
-    subtitle: "Calcule rendimento com ciclos compostos",
-    capital: "Capital Inicial (R$):",
-    tempo: "Tempo Total (dias):",
-    ciclo: "Escolha o Ciclo de Aporte:",
-    calcBtn: "Calcular Rendimento",
-    waiting: "Preencha os campos e clique em Calcular.",
-    invalid: "Por favor, insira valores válidos e maiores que zero.",
-    cyclesText: "Ciclos Completos",
-    totalInterest: "Total de Juros Ganhos",
-    finalAmount: "Montante Final Acumulado",
-    note: "Cálculo baseado em ciclos completos."
-  },
-  "pt-PT": {
-    title: "Calculadora jurosPooolpays",
-    subtitle: "Calcule rendimento com ciclos compostos",
-    capital: "Capital Inicial (€):",
-    tempo: "Tempo Total (dias):",
-    ciclo: "Escolha o Ciclo de Aporte:",
-    calcBtn: "Calcular Rendimento",
-    waiting: "Preencha os campos e clique em Calcular.",
-    invalid: "Por favor, insira valores válidos e maiores que zero.",
-    cyclesText: "Ciclos Completos",
-    totalInterest: "Total de Juros Ganhos",
-    finalAmount: "Montante Final Acumulado",
-    note: "Cálculo baseado em ciclos completos."
-  },
-  "en": {
-    title: "Compound Interest Calculator",
-    subtitle: "Calculate returns using fixed investment cycles",
-    capital: "Initial Capital (R$):",
-    tempo: "Total Time (days):",
-    ciclo: "Choose Contribution Cycle:",
-    calcBtn: "Calculate Return",
-    waiting: "Fill the fields and click Calculate.",
-    invalid: "Please enter valid values greater than zero.",
-    cyclesText: "Complete Cycles",
-    totalInterest: "Total Interest Earned",
-    finalAmount: "Final Accumulated Amount",
-    note: "Calculation based on full cycles."
-  },
-  "hi": {
-    title: "यौगिक ब्याज कैलकुलेटर",
-    subtitle: "नियत चक्रों के साथ रिटर्न की गणना करें",
-    capital: "प्रारंभिक पूँजी (R$):",
-    tempo: "कुल समय (दिन):",
-    ciclo: "योगदान चक्र चुनें:",
-    calcBtn: "वापसी गणना करें",
-    waiting: "फ़ील्ड भरें और गणना पर क्लिक करें।",
-    invalid: "कृपया शून्य से बड़े मान दर्ज करें।",
-    cyclesText: "पूर्ण चक्र",
-    totalInterest: "कुल ब्याज अर्जित",
-    finalAmount: "अंतिम संचयी राशि",
-    note: "पूर्ण चक्रों के आधार पर गणना।"
-  }
-};
-
-function setLanguage(lang){
-  const t = translations[lang] || translations["pt-BR"];
-  document.documentElement.lang = lang;
-  document.getElementById('title').textContent = t.title;
-  document.getElementById('subtitle').textContent = t.subtitle;
-  document.getElementById('label-capital').textContent = t.capital;
-  document.getElementById('label-tempo').textContent = t.tempo;
-  document.getElementById('label-ciclo').textContent = t.ciclo;
-  document.getElementById('calc-btn').textContent = t.calcBtn;
-  document.getElementById('resultado').textContent = t.waiting;
-  document.getElementById('note').textContent = t.note;
-
-  // store selected language
-  localStorage.setItem('juros_lang', lang);
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e, #162447);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
 }
 
-// Attach language buttons
-document.addEventListener('DOMContentLoaded', () => {
-  // init language from storage or browser
-  const saved = localStorage.getItem('juros_lang') || navigator.language || 'pt-BR';
-  const initial = (saved.startsWith('pt') && saved.includes('PT')) ? 'pt-PT' : (saved.startsWith('pt') ? 'pt-BR' : (saved.startsWith('hi') ? 'hi' : (saved.startsWith('en') ? 'en' : 'pt-BR')));
-  setLanguage(initial);
+.calculator-container {
+    background: rgba(0,0,0,0.75);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 255, 255, 0.2);
+    width: 100%;
+    max-width: 450px;
+    backdrop-filter: blur(5px);
+    text-align: center;
+}
 
-  document.querySelectorAll('.lang-switch .flag').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const lang = btn.getAttribute('data-lang');
-      document.querySelectorAll('.lang-switch .flag').forEach(x => x.classList.remove('active'));
-      btn.classList.add('active');
-      setLanguage(lang);
-    });
-  });
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #00fff7;
+    text-shadow: 0 0 10px #00fff7;
+}
 
-  document.getElementById('calc-btn').addEventListener('click', calcularJurosPooolpays);
-});
+label {
+    display: block;
+    margin: 15px 0 5px;
+    font-weight: bold;
+    color: #00e6e6;
+}
 
-// Main calculation function
-function calcularJurosPooolpays() {
-  const capitalInicial = parseFloat(document.getElementById('capital').value);
-  const tempoTotalDias = parseInt(document.getElementById('tempoTotal').value);
-  const cicloEscolhido = document.getElementById('ciclo').value;
-  const resultadoElement = document.getElementById('resultado');
-  const lang = localStorage.getItem('juros_lang') || document.documentElement.lang || 'pt-BR';
-  const t = translations[lang] || translations['pt-BR'];
+input[type="number"],
+select {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-size: 1em;
+    box-sizing: border-box;
+    outline: none;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+}
 
-  if (isNaN(capitalInicial) || isNaN(tempoTotalDias) || capitalInicial <= 0 || tempoTotalDias <= 0) {
-    resultadoElement.textContent = t.invalid;
-    return;
-  }
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
-  const [duracaoCiclo, taxaJuros] = cicloEscolhido.split('-').map(Number);
-  const numCiclos = Math.floor(tempoTotalDias / duracaoCiclo);
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,255,255,0.5);
+}
 
-  // Compound interest
-  const montanteFinal = capitalInicial * Math.pow((1 + taxaJuros), numCiclos);
-  const totalJuros = montanteFinal - capitalInicial;
+.youtube-btn {
+    background: linear-gradient(90deg, #FF0000, #FF4F4F);
+    color: #fff;
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 1em;
+    text-transform: uppercase;
+}
 
-  // Format currency depending on language (keep BRL symbol but formatting)
-  const montanteFormatado = montanteFinal.toLocaleString(lang === 'en' ? 'en-US' : (lang === 'hi' ? 'hi-IN' : 'pt-BR'), { style: 'currency', currency: 'BRL' });
-  const jurosFormatados = totalJuros.toLocaleString(lang === 'en' ? 'en-US' : (lang === 'hi' ? 'hi-IN' : 'pt-BR'), { style: 'currency', currency: 'BRL' });
+.language-selector {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
 
-  resultadoElement.innerHTML = `
-    <div>
-      <div>${t.cyclesText}: <strong>${numCiclos}</strong></div>
-      <div>${t.totalInterest}: <strong>${jurosFormatados}</strong></div>
-      <div>${t.finalAmount}: <strong>${montanteFormatado}</strong></div>
-      <div style="font-size:0.85em;color:#6b7280;margin-top:6px;">${t.note} (${numCiclos * duracaoCiclo} de ${tempoTotalDias} dias)</div>
-    </div>
-  `;
+.language-selector button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.3em;
+}
+
+.language-menu {
+    position: absolute;
+    background: #000c;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    margin-top: 5px;
+    display: none;
+}
+
+.language-selector:hover .language-menu {
+    display: flex;
+}
+
+.language-menu span {
+    padding: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
 }
