@@ -9,10 +9,11 @@
 </head>
 <body>
 
+
 <!-- Topo com idioma e YouTube -->
 <div class="top-bar">
     <div class="language-selector">
-        <button id="language-btn">🇧🇷</button>
+        <button id="language-btn" onclick="document.querySelector('.language-menu').classList.toggle('show')">🇧🇷</button>
         <div class="language-menu">
             <span onclick="changeLanguage('pt')">🇧🇷</span>
             <span onclick="changeLanguage('en')">🇬🇧</span>
@@ -27,26 +28,28 @@
 </div>
 
 <div class="calculator-container">
-<h1 id="title">Calculadora de Juros Pooolpays</h1>
+    <h1 id="title">Calculadora de Juros Pooolpays</h1>
+    <form onsubmit="event.preventDefault();calcularJurosPooolpays();">
+        <label for="capital">Aporte Inicial ($)</label>
+        <input id="capital" type="number" min="0" step="any" placeholder="Ex: 1000" required>
 
-<label>Aporte Inicial ($)</label>
-<input id="capital" type="number" placeholder="Ex: 1000">
+        <label for="ciclo">Ciclo</label>
+        <select id="ciclo">
+            <option value="1-0.005">1 Dia (0.5%)</option>
+            <option value="5-0.03">5 Dias (3%)</option>
+            <option value="10-0.07">10 Dias (7%)</option>
+            <option value="20-0.18">20 Dias (18%)</option>
+        </select>
 
-<label>Ciclo</label>
-<select id="ciclo">
-<option value="1-0.005">1 Dia (0.5%)</option>
-<option value="5-0.03">5 Dias (3%)</option>
-<option value="10-0.07">10 Dias (7%)</option>
-<option value="20-0.18">20 Dias (18%)</option>
-</select>
+        <label for="repeticoes">Repetições</label>
+        <input id="repeticoes" type="number" min="1" step="1" placeholder="Ex: 5" required>
 
-<label>Repetições</label>
-<input id="repeticoes" type="number" placeholder="Ex: 5">
-
-<button onclick="calcularJurosPooolpays()">Calcular</button>
-
-<div id="resultado"></div>
+        <button type="submit">Calcular</button>
+    </form>
+    <div id="resultado" style="margin-top:20px;"></div>
 </div>
+
+<script src="script.js"></script>
 
 <script src="script.js"></script>
 </body>
